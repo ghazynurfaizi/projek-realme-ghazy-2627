@@ -1,0 +1,1391 @@
+/* ==========================================================================
+   realme.com Showcase - Modern Interactive Single Page Experience
+   Dare to Leap | Theme Engine & Responsive Design
+   ========================================================================== */
+
+:root {
+  /* Brand Accents */
+  --realme-yellow: #FFC915;
+  --realme-yellow-hover: #E5B200;
+  --realme-yellow-glow: rgba(255, 201, 21, 0.35);
+  --realme-black: #0D0E12;
+  --realme-gray: #6F7380;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F4F6F9;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --bg-translucent: rgba(255, 255, 255, 0.85);
+  --border-color: #E2E8F0;
+  --border-highlight: #CBD5E1;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(255, 201, 21, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  --nav-border: rgba(0, 0, 0, 0.06);
+  --phone-spec-bg: #F1F5F9;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --bg-primary: #0A0B0E;
+  --bg-secondary: #12141B;
+  --bg-card: #181A22;
+  --bg-card-hover: #1F222C;
+  --bg-translucent: rgba(10, 11, 14, 0.85);
+  --border-color: #242733;
+  --border-highlight: #333849;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --hero-glow: radial-gradient(circle at 50% 30%, rgba(255, 201, 21, 0.15) 0%, rgba(10, 11, 14, 0) 70%);
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --phone-spec-bg: #14161E;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+body {
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Announcement Top Bar */
+.announcement-bar {
+  background: linear-gradient(90deg, #FFC915, #FFAA00);
+  color: #0A0B0E;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 101;
+}
+
+.announcement-bar span.badge {
+  background: #0A0B0E;
+  color: #FFC915;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--bg-translucent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--nav-border);
+  z-index: 100;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.brand-logo .logo-box {
+  background-color: var(--realme-yellow);
+  color: #000000;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  letter-spacing: -1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--text-primary);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--realme-yellow);
+  border-radius: 2px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Feature 1: Theme Switcher Button */
+.theme-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+}
+
+.theme-switch-btn:hover {
+  border-color: var(--realme-yellow);
+  box-shadow: 0 0 12px var(--realme-yellow-glow);
+  transform: translateY(-1px);
+}
+
+.theme-icon-container {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.btn-primary {
+  background-color: var(--realme-yellow);
+  color: #000000;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background-color: var(--realme-yellow-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--realme-yellow-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-highlight);
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-secondary);
+  border-color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  padding: 70px 24px 60px;
+  background: var(--hero-glow);
+  overflow: hidden;
+}
+
+.hero-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 201, 21, 0.15);
+  color: #E5A800;
+  border: 1px solid rgba(255, 201, 21, 0.35);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+[data-theme="dark"] .hero-tag {
+  color: #FFD043;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+
+.hero-title .highlight {
+  background: linear-gradient(135deg, #FFC915, #FF9500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  max-width: 540px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.hero-specs-row {
+  display: flex;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.spec-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Hero Visual Showcase */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-visual-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 9/15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floating-badge {
+  position: absolute;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  animation: floatAnim 4s ease-in-out infinite;
+}
+
+.badge-top-right {
+  top: 10%;
+  right: -10px;
+  animation-delay: 0.5s;
+}
+
+.badge-bottom-left {
+  bottom: 12%;
+  left: -20px;
+  animation-delay: 1.5s;
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* SECTION 2: Interactive Phone Color Switcher */
+.customizer-section {
+  padding: 90px 24px;
+  background-color: var(--bg-secondary);
+  transition: background-color var(--transition-normal);
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 50px;
+}
+
+.section-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 201, 21, 0.15);
+  color: #DDA200;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+[data-theme="dark"] .section-pill {
+  color: #FFC915;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.customizer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  box-shadow: var(--shadow-md);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+/* Realistic Phone Mockup (CSS/SVG Hybrid) */
+.phone-display-stage {
+  perspective: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 520px;
+}
+
+.phone-view-tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-secondary);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+  z-index: 5;
+}
+
+.view-tab-btn {
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.view-tab-btn.active {
+  background: var(--realme-yellow);
+  color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.phone-3d-wrapper {
+  position: relative;
+  width: 270px;
+  height: 540px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Phone Body Chassis */
+.phone-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+  transition: background var(--transition-slow), box-shadow var(--transition-slow);
+  overflow: hidden;
+  border: 4px solid #333842;
+}
+
+/* Shimmer Light Reflection Effect on Phone Back */
+.phone-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.2) 100%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Camera Island - realme Flagship Circular Luxury Watch Design */
+.camera-module {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1a1c23 0%, #0c0d11 100%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 0 3px #d4af37, inset 0 0 15px rgba(0,0,0,0.8);
+  border: 4px solid #232630;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 18px;
+  gap: 12px;
+  transition: border-color var(--transition-normal);
+}
+
+.lens {
+  position: relative;
+  background: radial-gradient(circle, #081525 20%, #03080e 70%, #1a2233 100%);
+  border-radius: 50%;
+  border: 2px solid #374151;
+  box-shadow: inset 0 0 10px #000, 0 2px 6px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lens::after {
+  content: '';
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #38bdf8 0%, #0369a1 60%, transparent 100%);
+  opacity: 0.7;
+}
+
+.lens-main {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.lens-periscope {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.lens-wide {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.camera-flash {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffae6 30%, #e2d9b8 80%, #948b6c 100%);
+  border: 2px solid #57534e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-center-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #d4af37;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  pointer-events: none;
+}
+
+/* realme Logo on Phone Back */
+.phone-realme-logo {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+
+/* Phone Front Screen View */
+.phone-front-screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  background: #000000;
+  border: 4px solid #20222b;
+  overflow: hidden;
+  display: none; /* toggled via JS */
+  z-index: 6;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+.front-wallpaper {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #1e1b4b 0%, #0f172a 50%, #312e81 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px 20px;
+  position: relative;
+}
+
+.punch-hole-cam {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #000000;
+  border: 1px solid #1e293b;
+  z-index: 10;
+}
+
+.screen-clock {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.screen-date {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #94A3B8;
+  margin-top: 6px;
+}
+
+.screen-widget {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 16px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Customizer Controls Panel */
+.customizer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.phone-model-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--realme-yellow);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.phone-model-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+.color-selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active-color-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+}
+
+.color-swatches {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.color-swatch-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  padding: 2px;
+  background-clip: content-box;
+  position: relative;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.color-swatch-btn:hover {
+  transform: scale(1.1);
+}
+
+.color-swatch-btn.active {
+  border-color: var(--realme-yellow);
+  transform: scale(1.15);
+  box-shadow: 0 0 16px var(--realme-yellow-glow);
+}
+
+.color-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.specs-grid-pill {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  background: var(--phone-spec-bg);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.spec-pill-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-pill-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spec-pill-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.purchase-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.price-tag {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-main {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.price-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+/* SECTION 3: MINI GAME - realmeow Surf Rush inside realme C100 Display */
+.game-section {
+  padding: 100px 24px;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 201, 21, 0.08) 0%, transparent 60%);
+}
+
+.game-outer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.realmeow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFC915;
+  color: #000;
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.game-title {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.game-controls-guide {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.controls-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.key-cap {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-highlight);
+  box-shadow: 0 2px 0 var(--border-highlight);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+/* REALME C100 SMARTPHONE FRAME DISPLAY */
+.phone-console-frame {
+  position: relative;
+  width: 380px;
+  height: 720px;
+  margin: 0 auto;
+  background: #111318;
+  border-radius: 54px;
+  padding: 14px;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.6), inset 0 0 0 3px #374151, inset 0 0 0 6px #1e222d;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Phone side buttons */
+.phone-console-frame::before {
+  /* Volume rocker */
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 130px;
+  width: 5px;
+  height: 90px;
+  background: #475569;
+  border-radius: 3px 0 0 3px;
+}
+
+.phone-console-frame::after {
+  /* Power button */
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 150px;
+  width: 5px;
+  height: 60px;
+  background: #FFC915;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Phone Bezel & Screen */
+.phone-console-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #06070a;
+  border-radius: 42px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+/* realme Mini Capsule 3.0 (Dynamic Island) at top */
+.mini-capsule {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 26px;
+  background: #000000;
+  border: 1px solid #1f242e;
+  border-radius: var(--radius-full);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  pointer-events: none;
+}
+
+.mini-capsule.active-capsule {
+  width: 220px;
+  background: #000;
+  border-color: #FFC915;
+  box-shadow: 0 0 14px rgba(255, 201, 21, 0.4);
+}
+
+.capsule-camera-dot {
+  width: 10px;
+  height: 10px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 50%;
+}
+
+.capsule-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #FFC915;
+}
+
+/* Canvas Element for 60FPS Subway Surfers Game */
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #0b0d14;
+}
+
+/* Game Overlay HUD & UI */
+.game-ui-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 44px 16px 20px;
+  z-index: 20;
+}
+
+.game-hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.score-badge, .coins-badge {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.coins-badge {
+  color: #FFC915;
+}
+
+.game-sound-btn {
+  pointer-events: auto;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.game-sound-btn:hover {
+  transform: scale(1.1);
+  background: #FFC915;
+  color: #000;
+}
+
+/* Onscreen Virtual Controls for Mobile/Touch */
+.game-touch-controls {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.touch-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 10px 0;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s, transform 0.1s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.touch-btn:active {
+  background: var(--realme-yellow);
+  color: #000;
+  transform: scale(0.92);
+}
+
+/* Game Start & Game Over Screen Modal */
+.game-screen-modal {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 7, 10, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  z-index: 25;
+  transition: opacity 0.3s ease;
+}
+
+.game-screen-modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-mascot-img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 8px 16px rgba(255, 201, 21, 0.4));
+  animation: pulseMascot 2s ease-in-out infinite;
+}
+
+@keyframes pulseMascot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.modal-subtitle {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  margin-bottom: 20px;
+}
+
+.modal-stats {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.modal-stat-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 18px;
+  border-radius: 14px;
+}
+
+.modal-stat-num {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--realme-yellow);
+}
+
+.modal-stat-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.btn-game-play {
+  background: var(--realme-yellow);
+  color: #000;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 12px 32px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px var(--realme-yellow-glow);
+  transition: all var(--transition-fast);
+  pointer-events: auto;
+}
+
+.btn-game-play:hover {
+  transform: translateY(-2px) scale(1.04);
+  background: var(--realme-yellow-hover);
+}
+
+/* Product Comparison & Ecosystem Section */
+.products-section {
+  padding: 80px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--realme-yellow);
+  box-shadow: var(--shadow-lg);
+}
+
+.product-badge-flag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--realme-yellow);
+  color: #000;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.product-card-img {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.product-series {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.product-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 4px 0 10px;
+}
+
+.product-highlight {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.product-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Footer Section */
+.footer {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 70px 24px 30px;
+  transition: background-color var(--transition-normal);
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.footer-brand-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 16px 0 24px;
+  max-width: 320px;
+}
+
+.dare-to-leap {
+  font-size: 1.6rem;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--realme-yellow);
+  letter-spacing: 0.5px;
+}
+
+.footer-col h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text-primary);
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-col a:hover {
+  color: var(--realme-yellow);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-subtitle {
+    margin: 0 auto 32px;
+  }
+  .hero-cta {
+    justify-content: center;
+  }
+  .hero-specs-row {
+    justify-content: center;
+  }
+  .customizer-container {
+    grid-template-columns: 1fr;
+    padding: 32px;
+  }
+  .game-outer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .realmeow-badge {
+    margin: 0 auto;
+  }
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  .section-title {
+    font-size: 2.2rem;
+  }
+  .phone-console-frame {
+    width: 320px;
+    height: 620px;
+    padding: 10px;
+  }
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
